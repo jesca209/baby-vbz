@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MindCare 🌱 | You Are Not Alone</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #a8edea, #fed6e3);
+        color: #333;
+        min-height: 100vh;
+    }
+
+    header {
+        background: #ffffffcc;
+        backdrop-filter: blur(10px);
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.5em;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    header p {
+        font-size: 1.2em;
+        margin: 10px 0 0 0;
+        color: #555;
+    }
+
+    section {
+        padding: 30px 25px;
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .card {
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+
+    .card h2 {
+        margin-top: 0;
+        color: #667eea;
+        font-size: 1.8em;
+    }
+
+    .quote {
+        font-size: 1.3em;
+        text-align: center;
+        padding: 20px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        border-radius: 15px;
+        margin: 15px 0;
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 14px 24px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 1.05em;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+
+    button:active {
+        transform: translateY(0);
+    }
+
+    .emotions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .emotion-btn {
+        padding: 18px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #f3f4ff 0%, #e6e8ff 100%);
+        text-align: center;
+        cursor: pointer;
+        font-size: 1.1em;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .emotion-btn:hover {
+        transform: scale(1.08);
+        background: linear-gradient(135deg, #e6e8ff 0%, #d1d5ff 100%);
+        border-color: #667eea;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    #emotionText {
+        margin-top: 20px;
+        padding: 15px;
+        background: #fff8e1;
+        border-radius: 12px;
+        font-size: 1.1em;
+        min-height: 50px;
+        border-left: 4px solid #ffc107;
+    }
+
+    /* Chatbot */
+    #chatbox {
+        height: 300px;
+        overflow-y: auto;
+        border: 2px solid #e6e8ff;
+        padding: 15px;
+        border-radius: 15px;
+        background: #fafafa;
+        margin-bottom: 15px;
+    }
+
+    .bot {
+        background: linear-gradient(135deg, #e0e7ff 0%, #d1d9ff 100%);
+        padding: 12px 16px;
+        border-radius: 18px 18px 18px 4px;
+        margin: 10px 0;
+        max-width: 80%;
+        animation: slideIn 0.3s ease;
+    }
+
+    .user {
+        background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        padding: 12px 16px;
+        border-radius: 18px 18px 4px 18px;
+        margin: 10px 0;
+        text-align: right;
+        margin-left: auto;
+        max-width: 80%;
+        animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    input[type="text"] {
+        width: calc(100% - 120px);
+        padding: 12px 16px;
+        border-radius: 12px;
+        border: 2px solid #e6e8ff;
+        font-size: 1em;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+        outline: none;
+        border-color: #667eea;
+    }
+
+    /* Breathing Exercise */
+    .breathing-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+    }
+
+    .breathing-circle {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.3em;
+        margin: 20px 0;
+        box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+        transition: all 4s ease-in-out;
+    }
+
+    .breathing-circle.breathe-in {
+        transform: scale(1.3);
+    }
+
+    .breathing-circle.breathe-out {
+        transform: scale(0.8);
+    }
+
+    .breathing-circle.hold {
+        transform: scale(1);
+    }
+
+    #breathingText {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #667eea;
+        min-height: 40px;
+    }
+
+    /* Journal */
+    .journal-entry {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 12px;
+        margin: 10px 0;
+        border-left: 4px solid #667eea;
+    }
+
+    .journal-entry-date {
+        font-size: 0.9em;
+        color: #888;
+        margin-bottom: 5px;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 12px;
+        border: 2px solid #e6e8ff;
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 1em;
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    textarea:focus {
+        outline: none;
+        border-color: #667eea;
+    }
+
+    #journalEntries {
+        max-height: 400px;
+        overflow-y: auto;
+        margin-top: 20px;
+    }
+
+    /* Crisis Resources */
+    .resource-list {
+        display: grid;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .resource-item {
+        background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 4px solid #ef4444;
+    }
+
+    .resource-item h3 {
+        margin: 0 0 10px 0;
+        color: #dc2626;
+    }
+
+    .resource-item p {
+        margin: 5px 0;
+        font-size: 1.1em;
+    }
+
+    .resource-item a {
+        color: #dc2626;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .resource-item a:hover {
+        text-decoration: underline;
+    }
+
+    /* Music Player */
+    .music-player {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 20px;
+        border-radius: 15px;
+        margin-top: 15px;
+    }
+
+    .song-info h3 {
+        color: #667eea;
+        margin: 0 0 15px 0;
+        font-size: 1.2em;
+    }
+
+    .music-controls {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .music-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        font-size: 1.3em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .music-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+
+    .music-btn:active {
+        transform: scale(0.95);
+    }
+
+    .play-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5em;
+    }
+
+    .volume-control {
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .volume-control span {
+        font-weight: bold;
+        color: #667eea;
+    }
+
+    .volume-slider {
+        flex: 1;
+        height: 6px;
+        border-radius: 5px;
+        outline: none;
+        background: #ddd;
+        -webkit-appearance: none;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #667eea;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .volume-slider::-webkit-slider-thumb:hover {
+        background: #764ba2;
+        transform: scale(1.2);
+    }
+
+    .volume-slider::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #667eea;
+        cursor: pointer;
+        border: none;
+    }
+
+    .playlist {
+        margin-top: 20px;
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .playlist h4 {
+        margin: 0 0 10px 0;
+        color: #667eea;
+        position: sticky;
+        top: 0;
+        background: white;
+        padding-bottom: 5px;
+        z-index: 1;
+    }
+
+    .song-item {
+        padding: 12px;
+        margin: 8px 0;
+        background: linear-gradient(135deg, #f3f4ff 0%, #e6e8ff 100%);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-left: 4px solid transparent;
+    }
+
+    .song-item:hover {
+        background: linear-gradient(135deg, #e6e8ff 0%, #d1d5ff 100%);
+        border-left-color: #667eea;
+        transform: translateX(5px);
+    }
+
+    .song-item.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-left-color: #764ba2;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 1em;
+        background: #ffffffcc;
+        backdrop-filter: blur(10px);
+        margin-top: 30px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    /* Tab Navigation */
+    .tab-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        background: #f3f4ff;
+        color: #667eea;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .tab-btn:hover {
+        background: #e6e8ff;
+    }
+
+    .tab-btn.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-color: #667eea;
+    }
+
+    @media (max-width: 768px) {
+        header h1 {
+            font-size: 2em;
+        }
+        
+        .emotions {
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>MindCare 🌱</h1>
+    <p>Healing takes time. You are already brave 💙</p>
+</header>
+
+<section>
+    <div class="card">
+        <h2>🌟 Daily Motivation</h2>
+        <p class="quote" id="quote">Click below for encouragement ✨</p>
+        <button onclick="newQuote()">New Quote 💬</button>
+    </div>
+
+    <div class="card">
+        <h2>💭 How are you feeling today?</h2>
+        <div class="emotions">
+            <div class="emotion-btn" onclick="emotion('addiction')">🚫 Addiction</div>
+            <div class="emotion-btn" onclick="emotion('stress')">😰 Stress</div>
+            <div class="emotion-btn" onclick="emotion('sad')">😢 Sadness</div>
+            <div class="emotion-btn" onclick="emotion('lonely')">🥺 Loneliness</div>
+            <div class="emotion-btn" onclick="emotion('fear')">😨 Fear</div>
+            <div class="emotion-btn" onclick="emotion('anger')">😡 Anger</div>
+            <div class="emotion-btn" onclick="emotion('hope')">🌈 Hope</div>
+            <div class="emotion-btn" onclick="emotion('anxious')">😟 Anxiety</div>
+        </div>
+        <p id="emotionText"></p>
+    </div>
+
+    <div class="card">
+        <h2>🫁 Breathing Exercise</h2>
+        <div class="breathing-container">
+            <div id="breathingText">Click below to start</div>
+            <div class="breathing-circle" id="breathingCircle">
+                Breathe
+            </div>
+            <button onclick="toggleBreathing()" id="breathingBtn">Start Breathing Exercise 🌬️</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📝 Mood Journal</h2>
+        <p>Writing down your feelings can help process them. Your entries are saved privately in your browser.</p>
+        <textarea id="journalInput" placeholder="How are you feeling? What's on your mind today?"></textarea>
+        <button onclick="saveJournalEntry()">Save Entry 💾</button>
+        <button onclick="clearJournal()" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">Clear All Entries 🗑️</button>
+        <div id="journalEntries"></div>
+    </div>
+
+    <div class="card">
+        <h2>🤖 Comfort Chatbot</h2>
+        <div id="chatbox">
+            <div class="bot">Hello 💙 I'm here to listen. You matter, and your feelings are valid.</div>
+        </div>
+        <input type="text" id="userInput" placeholder="Type how you feel..." onkeypress="if(event.key==='Enter') sendMessage()" />
+        <button onclick="sendMessage()">Send ✨</button>
+    </div>
+
+    <div class="card">
+        <h2>🎵 Calming Music</h2>
+        <p>Music can help soothe your mind and ease your emotions. Listen to these calming tracks.</p>
+        
+        <div class="music-player">
+            <div class="song-info">
+                <h3 id="songTitle">🎵 Select a song below</h3>
+            </div>
+
+            <audio id="musicPlayer" style="width: 100%; margin: 15px 0;"></audio>
+
+            <div class="music-controls">
+                <button onclick="prevSong()" class="music-btn">⏮️</button>
+                <button onclick="togglePlay()" id="playBtn" class="music-btn play-btn">▶️</button>
+                <button onclick="nextSong()" class="music-btn">⏭️</button>
+                <button onclick="shuffleSong()" class="music-btn">🔀</button>
+            </div>
+
+            <div class="volume-control">
+                <span>🔊 Volume</span>
+                <input type="range" min="0" max="1" step="0.01" value="0.7" onchange="setVolume(this.value)" class="volume-slider">
+            </div>
+
+            <div class="playlist">
+                <h4>Playlist:</h4>
+                <div class="song-item" onclick="playSongByIndex(0)">
+                    🎵 Phenomena - Kenny Sol
+                </div>
+                <div class="song-item" onclick="playSongByIndex(1)">
+                    🎵 Wine - Kivumbi King
+                </div>
+                <div class="song-item" onclick="playSongByIndex(2)">
+                    🎹 Peaceful Piano
+                </div>
+                <div class="song-item" onclick="playSongByIndex(3)">
+                    🌊 Calm Ocean Waves
+                </div>
+                <div class="song-item" onclick="playSongByIndex(4)">
+                    🎸 Relaxing Guitar
+                </div>
+                <div class="song-item" onclick="playSongByIndex(5)">
+                    🧘 Morning Meditation
+                </div>
+                <div class="song-item" onclick="playSongByIndex(6)">
+                    🌧️ Soft Rain & Piano
+                </div>
+                <div class="song-item" onclick="playSongByIndex(7)">
+                    🎼 Gentle Acoustic
+                </div>
+                <div class="song-item" onclick="playSongByIndex(8)">
+                    💆 Spa Relaxation
+                </div>
+                <div class="song-item" onclick="playSongByIndex(9)">
+                    😴 Deep Sleep Music
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🆘 Crisis Resources</h2>
+        <p><strong>If you're in crisis or thinking about harming yourself, please reach out immediately:</strong></p>
+        <div class="resource-list">
+            <div class="resource-item">
+                <h3>🇷🇼 Rwanda Emergency Services</h3>
+                <p>📞 Police Emergency: <strong>112</strong></p>
+                <p>📞 Ambulance/Medical Emergency: <strong>912</strong></p>
+                <p>📞 Mental Health Support: <strong>+250 788 385 878</strong> (Ndera Neuropsychiatric Hospital)</p>
+                <p>Available for crisis intervention and mental health support</p>
+            </div>
+            <div class="resource-item">
+                <h3>🇺🇸 National Suicide Prevention Lifeline (USA)</h3>
+                <p>📞 Call or Text: <strong>988</strong></p>
+                <p>Available 24/7 for free and confidential support</p>
+            </div>
+            <div class="resource-item">
+                <h3>🌍 International Association for Suicide Prevention</h3>
+                <p>🌐 <a href="https://www.iasp.info/resources/Crisis_Centres/" target="_blank">Find helplines worldwide</a></p>
+            </div>
+            <div class="resource-item">
+                <h3>💬 Crisis Text Line (USA, UK, Canada, Ireland)</h3>
+                <p>📱 Text <strong>HELLO</strong> to <strong>741741</strong></p>
+                <p>Free 24/7 crisis support via text</p>
+            </div>
+            <div class="resource-item">
+                <h3>🧠 SAMHSA National Helpline (Substance Abuse)</h3>
+                <p>📞 Call: <strong>1-800-662-4357</strong></p>
+                <p>Free, confidential, 24/7 treatment referral</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    💙 You are not weak for struggling. Asking for help is strength.<br>
+    <small>This website provides peer support and resources. It is not a substitute for professional mental health care.</small>
+</footer>
+
+<script>
+const quotes = [
+    "Every small step forward matters 🌱",
+    "You are stronger than the urge 💪",
+    "Healing is not linear, and that's okay 💙",
+    "Your future needs you — keep going 🌈",
+    "Today you tried, and that is enough ✨",
+    "Another day to remind you are the best",
+    "Work and fail, but never fail to try",
+    "Sometimes people's opinion doesn't matter",
+    "Sometimes we need to see the positive side instead of the negative one",
+    "Think about those who love you because everyone has haters", 
+    "Negativity doesn't deserve our attention",
+    "Cry if you want because it's not for weak people, it also sets your heart free",
+    "I'm always there for you darling ",
+    "You have to believe in yourself before anyone else does ",
+    "Always know that you are the best sweetheart",
+    "Progress, not perfection 🌟",
+    "You deserve compassion, especially from yourself 💚",
+    "Bad days don't mean a bad life 🌤️",
+    "Recovery is worth it. You are worth it 💎",
+    "One moment at a time. You've got this 🌸"
+];   
+
+function newQuote() {
+    const quoteEl = document.getElementById("quote");
+    quoteEl.style.opacity = '0';
+    setTimeout(() => {
+        quoteEl.innerText = quotes[Math.floor(Math.random() * quotes.length)];
+        quoteEl.style.opacity = '1';
+    }, 200);
+}
+
+function emotion(type) {
+    const messages = {
+        addiction: "🚫 Breaking addiction is hard, but you are not broken. One day at a time, one moment at a time. You have the strength within you 💙",
+        stress: "😰 Take a slow, deep breath. You are allowed to pause. It's okay to take things one step at a time. You're doing better than you think.",
+        sad: "😢 Your feelings are valid and important. You deserve kindness and compassion. It's okay to not be okay sometimes.",
+        lonely: "🥺 Even now, you are not alone. Someone cares about you. You matter more than you know. Reach out when you're ready.",
+        fear: "😨 Fear doesn't control your future. You are safe right now in this moment. Take it one breath at a time.",
+        anger: "😡 Strong emotions pass like storms. You are learning to manage them, and that takes courage. Be patient with yourself.",
+        hope: "🌈 Hold onto hope — it grows quietly even in dark times. Your hope can light the way forward.",
+        anxious: "😟 Anxiety is uncomfortable but it will pass. Ground yourself in this moment. You are safe. You are capable."
+    };
+    const emotionTextEl = document.getElementById("emotionText");
+    emotionTextEl.style.opacity = '0';
+    setTimeout(() => {
+        emotionTextEl.innerText = messages[type];
+        emotionTextEl.style.opacity = '1';
+    }, 150);
+}
+
+// Chatbot - Enhanced AI-like responses
+function sendMessage() {
+    const input = document.getElementById("userInput");
+    const chatbox = document.getElementById("chatbox");
+    const userText = input.value.trim();
+    if (!userText) return;
+
+    chatbox.innerHTML += `<div class="user">${userText}</div>`;
+    input.value = "";
+
+    const lowerText = userText.toLowerCase();
+    let response = "";
+
+    // Greetings
+    if (lowerText.match(/\b(hi|hello|hey|greetings|good morning|good afternoon|good evening)\b/)) {
+        const greetings = [
+            "Hello! How are you feeling today? I'm here to listen and support you. 💙",
+            "Hi there! Welcome. What's on your mind today? I'm here for you. 🌟",
+            "Hey! I'm glad you're here. How can I support you today? 💚",
+            "Good to see you! How are things going? Feel free to share anything. 🌈"
+        ];
+        response = greetings[Math.floor(Math.random() * greetings.length)];
+    }
+    // Addiction and urges
+    else if (lowerText.match(/\b(addict|addiction|urge|crave|craving|relapse|sober|sobriety|recovery)\b/)) {
+        const addictionResponses = [
+            "Recovery is a journey, not a destination. Every moment you resist an urge is a victory. You're stronger than you know. What triggered this feeling? 🌱",
+            "Urges are temporary - they come in waves and they pass. You don't have to act on them. Can you try a grounding technique right now? Deep breaths, name 5 things you can see. 💪",
+            "I know how hard this is. Recovery isn't linear, and setbacks don't erase progress. What coping strategies have helped you before? You've got this, one moment at a time. 🌟",
+            "The fact that you're reaching out shows incredible strength. Addiction is tough, but you're tougher. Have you been able to connect with your support system or sponsor? 💙"
+        ];
+        response = addictionResponses[Math.floor(Math.random() * addictionResponses.length)];
+    }
+    // Depression and sadness
+    else if (lowerText.match(/\b(sad|sadness|depress|depressed|depression|down|low|hopeless|empty|numb)\b/)) {
+        const sadResponses = [
+            "I hear you, and I'm really sorry you're feeling this way. Depression is incredibly hard. Your feelings are valid. Have you been able to talk to anyone about how you're feeling? 😢",
+            "Thank you for sharing this with me. When you're feeling low, sometimes even the smallest tasks feel overwhelming. What's one tiny thing that might help right now - maybe a glass of water or opening a window? 💙",
+            "Depression can make everything feel heavy and meaningless. But you matter, even when your brain tells you otherwise. Are you getting any professional support for these feelings? 🌱",
+            "Feeling down is exhausting. Please be gentle with yourself. You don't have to have everything figured out right now. Is there anything that usually brings you even a little comfort? 💚"
+        ];
+        response = sadResponses[Math.floor(Math.random() * sadResponses.length)];
+    }
+    // Loneliness
+    else if (lowerText.match(/\b(alone|lonely|isolated|isolation|no one|nobody)\b/)) {
+        const lonelyResponses = [
+            "Loneliness is so painful, and I'm sorry you're experiencing it. Even though it feels like you're alone, you're not - I'm here, and there are people who care. Have you thought about reaching out to anyone? 🥺",
+            "Feeling isolated is really tough. Sometimes it helps to connect, even in small ways - a message to an old friend, joining an online community, or even talking to a neighbor. What feels manageable for you? 💙",
+            "You're not truly alone, even when it feels that way. I know connection feels hard right now. Would it help to talk about what's making you feel isolated? I'm listening. 🌟",
+            "Loneliness can be overwhelming. Remember that it's a feeling, not a permanent reality. You deserve connection and community. Is there anyone you trust that you could reach out to? 💚"
+        ];
+        response = lonelyResponses[Math.floor(Math.random() * lonelyResponses.length)];
+    }
+    // Anxiety
+    else if (lowerText.match(/\b(anxious|anxiety|panic|panicking|worry|worried|nervous|scared about|fear)\b/)) {
+        const anxietyResponses = [
+            "Anxiety can feel overwhelming, but you're safe right now in this moment. Let's try grounding: Take a slow breath. Name 5 things you can see around you. How are you feeling now? 😟",
+            "I understand anxiety is really difficult. Your worries might feel huge right now, but they will pass. Have you tried any breathing exercises or meditation? The breathing exercise on this page might help. 🌬️",
+            "When anxiety hits, it can feel like everything is spiraling. But you've gotten through this before, and you'll get through it again. What usually helps you calm down? 💙",
+            "Anxiety is your brain trying to protect you, but sometimes it goes into overdrive. You're not in danger right now. Can you focus on your breath for a moment? In for 4, out for 4. 🌱"
+        ];
+        response = anxietyResponses[Math.floor(Math.random() * anxietyResponses.length)];
+    }
+    // Stress and overwhelm
+    else if (lowerText.match(/\b(stress|stressed|overwhelm|overwhelmed|too much|can't cope|breaking)\b/)) {
+        const stressResponses = [
+            "That sounds really overwhelming. When everything feels like too much, try breaking things down into smaller pieces. What's ONE thing you could handle right now? 😰",
+            "I hear that you're stressed. Remember, you can only do one thing at a time. It's okay to prioritize, delegate, or say no. What's the most urgent thing on your mind? 💙",
+            "Feeling overwhelmed is exhausting. Give yourself permission to pause and breathe. You don't have to solve everything right now. What would help you feel even a little better? 🌟",
+            "Stress can make everything feel impossible. But you're handling more than you think. Is there anyone who can help share the load? It's okay to ask for support. 💚"
+        ];
+        response = stressResponses[Math.floor(Math.random() * stressResponses.length)];
+    }
+    // Anger
+    else if (lowerText.match(/\b(angry|anger|mad|frustrated|irritated|furious|rage)\b/)) {
+        const angerResponses = [
+            "It's completely okay to feel angry. Your emotions are valid. What's making you feel this way? Sometimes talking about it helps. 😡",
+            "Anger is a natural emotion, and it sounds like you have good reasons to feel this way. How can you express this anger in a healthy way? Maybe physical activity or journaling? 💙",
+            "I hear your frustration. Anger often comes from feeling hurt, unheard, or treated unfairly. Do you want to talk about what triggered these feelings? 🌟",
+            "Feeling angry is normal, and it's good you're acknowledging it rather than suppressing it. What do you need right now to feel heard or validated? 💚"
+        ];
+        response = angerResponses[Math.floor(Math.random() * angerResponses.length)];
+    }
+    // Suicidal thoughts or self-harm
+    else if (lowerText.match(/\b(suicide|suicidal|kill myself|end it|die|death|harm myself|hurt myself|self harm|cutting)\b/)) {
+        response = "🆘 I'm really concerned about what you're sharing. These feelings are serious, and you deserve immediate professional support. Please reach out to a crisis helpline right away:<br><br>🇷🇼 Rwanda: Call <strong>112</strong> or <strong>+250 788 385 878</strong><br>🇺🇸 USA: Call or text <strong>988</strong><br><br>Your life matters. Please don't go through this alone. Will you reach out for help?";
+    }
+    // Hope and positivity
+    else if (lowerText.match(/\b(hope|hopeful|better|improving|good|happy|grateful|thank)\b/)) {
+        const hopeResponses = [
+            "That's wonderful to hear! Hold onto that hope - even small glimmers can light the way forward. What's helping you feel this way? 🌈",
+            "I'm so glad you're feeling more hopeful. Keep nurturing that positive energy. You deserve good things. What's been going well for you? ✨",
+            "It's beautiful that you're feeling better. Progress isn't always linear, but you're moving forward. What strategies are working for you? 💚",
+            "Thank you for sharing that positivity! Celebrating the good moments is so important. I'm proud of you for keeping going. 🌟"
+        ];
+        response = hopeResponses[Math.floor(Math.random() * hopeResponses.length)];
+    }
+    // Questions about the bot
+    else if (lowerText.match(/\b(who are you|what are you|are you real|are you human|are you ai|chatbot)\b/)) {
+        response = "I'm a supportive chatbot designed to provide comfort and encouragement for mental health struggles. While I'm not a human or a replacement for professional help, I'm here to listen and offer support. How can I help you today? 💙";
+    }
+    // Help requests
+    else if (lowerText.match(/\b(help|help me|need help|support|assistance)\b/)) {
+        response = "I'm here to support you. Can you tell me more about what you're going through? Whether it's addiction, anxiety, depression, or something else - I'm listening without judgment. What's on your mind? 💙";
+    }
+    // Goodbye
+    else if (lowerText.match(/\b(bye|goodbye|see you|talk later|gotta go)\b/)) {
+        const goodbyes = [
+            "Take care of yourself. Remember, you're stronger than you think. Feel free to come back anytime. 💙",
+            "Goodbye for now. Be gentle with yourself today. I'm here whenever you need support. 🌟",
+            "See you later! Remember - progress, not perfection. You've got this. 💚",
+            "Take care! Don't forget: you matter, you're not alone, and help is always available. 🌈"
+        ];
+        response = goodbyes[Math.floor(Math.random() * goodbyes.length)];
+    }
+    // Default empathetic response
+    else {
+        const defaultResponses = [
+            "Thank you for sharing that with me. I'm listening. Can you tell me more about what you're experiencing? 💙",
+            "I hear you. Your feelings are valid, whatever they are. What's been the hardest part about what you're going through? 🌟",
+            "I appreciate you opening up. That takes courage. How long have you been feeling this way? 💚",
+            "I'm here for you. Would you like to talk more about what's on your mind? Sometimes it helps just to express it. 💙",
+            "Thank you for trusting me with this. You don't have to go through this alone. What kind of support would be most helpful right now? 🌈"
+        ];
+        response = defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+    }
+
+    setTimeout(() => {
+        chatbox.innerHTML += `<div class="bot">${response}</div>`;
+        chatbox.scrollTop = chatbox.scrollHeight;
+    }, 800);
+}
+
+// Breathing Exercise
+let breathingInterval;
+let isBreathing = false;
+
+function toggleBreathing() {
+    if (isBreathing) {
+        stopBreathing();
+    } else {
+        startBreathing();
+    }
+}
+
+function startBreathing() {
+    isBreathing = true;
+    document.getElementById("breathingBtn").innerText = "Stop Exercise ⏸️";
+    const circle = document.getElementById("breathingCircle");
+    const text = document.getElementById("breathingText");
+    
+    let phase = 0;
+    const phases = [
+        { duration: 4000, class: 'breathe-in', text: 'Breathe In... 🌬️', circleText: 'Inhale' },
+        { duration: 4000, class: 'hold', text: 'Hold... ⏸️', circleText: 'Hold' },
+        { duration: 4000, class: 'breathe-out', text: 'Breathe Out... 💨', circleText: 'Exhale' },
+        { duration: 4000, class: 'hold', text: 'Hold... ⏸️', circleText: 'Hold' }
+    ];
+    
+    function nextPhase() {
+        const current = phases[phase];
+        circle.className = 'breathing-circle ' + current.class;
+        text.innerText = current.text;
+        circle.innerText = current.circleText;
+        
+        phase = (phase + 1) % phases.length;
+    }
+    
+    nextPhase();
+    breathingInterval = setInterval(nextPhase, 4000);
+}
+
+function stopBreathing() {
+    isBreathing = false;
+    clearInterval(breathingInterval);
+    document.getElementById("breathingBtn").innerText = "Start Breathing Exercise 🌬️";
+    document.getElementById("breathingCircle").className = 'breathing-circle';
+    document.getElementById("breathingCircle").innerText = 'Breathe';
+    document.getElementById("breathingText").innerText = 'Click below to start';
+}
+
+// Journal
+function saveJournalEntry() {
+    const input = document.getElementById("journalInput");
+    const text = input.value.trim();
+    if (!text) return;
+    
+    const entries = JSON.parse(localStorage.getItem('journalEntries') || '[]');
+    const entry = {
+        text: text,
+        date: new Date().toLocaleString()
+    };
+    entries.unshift(entry);
+    localStorage.setItem('journalEntries', JSON.stringify(entries));
+    
+    input.value = '';
+    displayJournalEntries();
+}
+
+function displayJournalEntries() {
+    const entries = JSON.parse(localStorage.getItem('journalEntries') || '[]');
+    const container = document.getElementById('journalEntries');
+    
+    if (entries.length === 0) {
+        container.innerHTML = '<p style="color: #888; text-align: center; margin-top: 20px;">No entries yet. Start writing your thoughts above! ✍️</p>';
+        return;
+    }
+    
+    container.innerHTML = entries.map(entry => `
+        <div class="journal-entry">
+            <div class="journal-entry-date">${entry.date}</div>
+            <div>${entry.text}</div>
+        </div>
+    `).join('');
+}
+
+function clearJournal() {
+    if (confirm('Are you sure you want to delete all journal entries? This cannot be undone.')) {
+        localStorage.removeItem('journalEntries');
+        displayJournalEntries();
+    }
+}
+
+// Initialize
+window.onload = function() {
+    displayJournalEntries();
+    newQuote();
+    // Set initial volume for music player
+    const musicPlayer = document.getElementById("musicPlayer");
+    if (musicPlayer) {
+        musicPlayer.volume = 0.7;
+    }
+};
+
+// Music Player
+const songs = [
+    {
+        name: "Phenomena - Kenny Sol",
+        src: "Kenny_Sol_-_Phenomena__Official_Video_(48k).mp3"
+    },
+    {
+        name: "Wine - Kivumbi King",
+        src: "Kivumbi_King_-_Wine_(Lyrics).mp4"
+    },
+    {
+        name: "Peaceful Piano",
+        src: "https://cdn.pixabay.com/audio/2022/03/10/audio_4e3f3d5e27.mp3"
+    },
+    {
+        name: "Calm Ocean Waves",
+        src: "https://cdn.pixabay.com/audio/2022/03/15/audio_4037c6e6b0.mp3"
+    },
+    {
+        name: "Relaxing Guitar",
+        src: "https://cdn.pixabay.com/audio/2023/02/28/audio_a209b2b110.mp3"
+    },
+    {
+        name: "Morning Meditation",
+        src: "https://cdn.pixabay.com/audio/2022/05/13/audio_66b8e87743.mp3"
+    },
+    {
+        name: "Soft Rain & Piano",
+        src: "https://cdn.pixabay.com/audio/2022/08/02/audio_38fa8c28c2.mp3"
+    },
+    {
+        name: "Gentle Acoustic",
+        src: "https://cdn.pixabay.com/audio/2023/10/30/audio_c20ec01115.mp3"
+    },
+    {
+        name: "Spa Relaxation",
+        src: "https://cdn.pixabay.com/audio/2022/03/23/audio_2c759df3da.mp3"
+    },
+    {
+        name: "Deep Sleep Music",
+        src: "https://cdn.pixabay.com/audio/2022/11/22/audio_1e5d924051.mp3"
+    }
+];
+
+let currentSongIndex = 0;
+let isMusicPlaying = false;
+
+const musicPlayer = document.getElementById("musicPlayer");
+const songTitle = document.getElementById("songTitle");
+const playBtn = document.getElementById("playBtn");
+
+function loadSong(index) {
+    currentSongIndex = index;
+    musicPlayer.src = songs[index].src;
+    songTitle.textContent = "🎵 " + songs[index].name;
+    
+    // Update active state in playlist
+    document.querySelectorAll('.song-item').forEach((item, i) => {
+        if (i === index) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+}
+
+function togglePlay() {
+    if (!musicPlayer.src) {
+        loadSong(0);
+    }
+    
+    if (isMusicPlaying) {
+        musicPlayer.pause();
+        playBtn.textContent = "▶️";
+        isMusicPlaying = false;
+    } else {
+        musicPlayer.play();
+        playBtn.textContent = "⏸️";
+        isMusicPlaying = true;
+    }
+}
+
+function nextSong() {
+    currentSongIndex = (currentSongIndex + 1) % songs.length;
+    loadSong(currentSongIndex);
+    if (isMusicPlaying || !musicPlayer.src) {
+        musicPlayer.play();
+        playBtn.textContent = "⏸️";
+        isMusicPlaying = true;
+    }
+}
+
+function prevSong() {
+    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+    loadSong(currentSongIndex);
+    if (isMusicPlaying || !musicPlayer.src) {
+        musicPlayer.play();
+        playBtn.textContent = "⏸️";
+        isMusicPlaying = true;
+    }
+}
+
+function shuffleSong() {
+    currentSongIndex = Math.floor(Math.random() * songs.length);
+    loadSong(currentSongIndex);
+    musicPlayer.play();
+    playBtn.textContent = "⏸️";
+    isMusicPlaying = true;
+}
+
+function setVolume(value) {
+    musicPlayer.volume = value;
+}
+
+function playSongByIndex(index) {
+    loadSong(index);
+    musicPlayer.play();
+    playBtn.textContent = "⏸️";
+    isMusicPlaying = true;
+}
+
+// Auto-play next song when current ends
+musicPlayer.addEventListener("ended", () => {
+    nextSong();
+});
+
+// Update play button when music plays/pauses
+musicPlayer.addEventListener("play", () => {
+    playBtn.textContent = "⏸️";
+    isMusicPlaying = true;
+});
+
+musicPlayer.addEventListener("pause", () => {
+    playBtn.textContent = "▶️";
+    isMusicPlaying = false;
+});
+</script>
+
+</body>
+</html>
